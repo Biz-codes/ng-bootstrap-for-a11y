@@ -115,7 +115,7 @@ One commit per component, in table order:
 
 - [x] 1.1 `StatusBadgeComponent`
 - [x] 1.2 `TutorialLayoutComponent`
-- [ ] 1.3 `TutorialSectionComponent`
+- [x] 1.3 `TutorialSectionComponent`, plus heading sizes and weight in `src/styles.scss`
 - [ ] 1.4 `OnThisPageComponent`
 - [ ] 1.5 `TicketComponent`
 - [ ] 1.6 `CodeViewerComponent`
@@ -180,6 +180,21 @@ Tutorial 1 is assembled from Phase 1 components, one commit per step:
 - [ ] Video-hosting/deploy target decisions and record videos 
 - [ ] Dark mode palette, contrast-checked
 - [ ] Header theme toggle with `aria-label` and `ngbTooltip`
+
+## Mockup differences
+
+Running list for 5.3 and a possible wireframe revision.
+
+| Step | Mockup | Build | Status |
+|------|--------|-------|--------|
+| 1.1 | No status badge | `StatusBadgeComponent`: `.badge` with `bg-*-subtle`, `text-*-emphasis`, `border-*-subtle` (secondary for Coming soon, warning for Under construction), `.text-uppercase` | Added |
+| 1.2 | Breadcrumb above the `<h1>` | Not in `TutorialLayoutComponent` | Not built; could come from the 2.1 nav data |
+| 1.2 | Tag, time, and tested-versions row under the `<h1>` | Not in `TutorialLayoutComponent`; can be projected | Not built |
+| 1.2 | No status badge beside the `<h1>` | `StatusBadgeComponent` beside the `<h1>`, outside it | Added |
+| 1.2 | Pagination link: "Previous" / "Next" label above title | Same, plus a visually hidden ": " between label and title | Matches visually |
+| 1.2 | "On this page" column | Content column `col-xl-9`; right column waits for 1.4 | Pending 1.4 |
+| 1.3 | Step number before the `<h2>` | Optional `number` input, outside the `<h2>` | Matches |
+| 1.3 | Headings 44 / 30 / 21px, bold | `$h1-font-size` 2.75rem, `$h2-font-size` 1.875rem, `$h3-font-size` 1.3125rem, `$headings-font-weight` 700; Bootstrap scales them down below 1200px | Matches at 1200px and up |
 
 ## Open questions
 

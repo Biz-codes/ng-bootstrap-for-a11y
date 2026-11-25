@@ -13,7 +13,7 @@ The project owner writes all documentation and tutorial content. Claude builds t
 - Documentation or tutorial content: intros, explanations, steps, notes, tips, Watch out dialog text, ticket text (summaries, user stories, acceptance criteria), captions.
 - Prose in Markdown files (`README.md`, `DESIGN.md`, `docs/`). Factual tables (tokens, hex values, contrast ratios, class names) are fine; descriptions and explanations are not.
 - Alt text and video transcripts. Use a placeholder such as `[Alt text: what to notice]`.
-- Code comments. Leave code uncommented, or add a placeholder comment (`// [Comment: why this override exists]`) where an explanation belongs.
+- Code comments. Leave code uncommented, or add a placeholder comment (`// [Comment: why this override exists]`) where an explanation belongs. Existing comments that record design decisions, such as those in `src/styles.scss`, are process notes that never appear on the site. Keep them as they are; don't replace them with placeholders.
 - Feedback on the owner's writing: no reviews, critiques, or suggestions about wording, clarity, tone, or structure, and no edits to the owner's text.
 
 **When a task needs written content,** build the structure with placeholders and list in the reply which placeholders the owner needs to fill. Don't offer drafts, "suggested wording", or example sentences, even when asked to be helpful, unless the owner explicitly asks for one in that message.

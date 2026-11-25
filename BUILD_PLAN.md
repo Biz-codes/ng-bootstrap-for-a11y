@@ -89,7 +89,7 @@ Claude's task list. One commit per step.
 - [x] 0.2 Add `axe-core` and a shared axe test helper for Vitest
 - [x] 0.3 Add an `npm run lint` script (Angular ESLint with template a11y rules)
 - [x] 0.4 Pre-commit hooks: lint and format staged files, run tests
-- [ ] 0.5 GitHub Actions workflow: lint, test, and build on every push and pull request
+- [x] 0.5 GitHub Actions workflow: lint, test, and build on every push and pull request
 
 ### Phase 1: Reusable components
 

@@ -4,6 +4,8 @@
 
 **[View the mockups on the design canvas →](https://claude.ai/artifact/YNo5DKTvmajhYrEStYKJgC)**
 
+> **To do:** Once core functionality is built, consider whether to update the designs.
+
 [Note on the mockups: text areas hold outlines and writing-convention notes, not final copy]
 
 ## Contents

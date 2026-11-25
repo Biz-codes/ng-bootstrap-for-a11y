@@ -10,9 +10,9 @@ The project's professional purpose is to showcase technical writing skills.
 
 ## Site structure
 
-- **Home:** explains the project.
-- **Side nav:** links to each tutorial.
-- **Tutorials:** step-by-step instructions with screenshots, and videos later. No progress tracking.
+- **Home:** explains the project. Claude just create with "Coming soon..."
+- **Side nav:** links to each tutorial. Setup and general tutorials above specific components etc.
+- **Tutorials:** step-by-step instructions with screenshots, and videos later. No progress tracking. Claude only sets up template per CLAUDE.md. Should show status badge as "COMING SOON" or "UNDER CONSTRUCTION" as appropriate next to heading.
 
 ## Design decisions
 
@@ -22,7 +22,7 @@ The project's professional purpose is to showcase technical writing skills.
 | 2 | Page layout | Top header, left side nav, content. Tutorial pages add an "On this page" list on the right. | Decided |
 | 3 | Color and type | Deep violet palette, mapped to Bootstrap Sass variables (below). Bootstrap's default system font stack. | Decided |
 | 4 | Tutorial structure | Ticket-based refactor (see [Tutorial template](#tutorial-template)) | Decided |
-| 5 | Placeholders and writing notes in mockups | Outline boxes with bracketed prompts, plus switchable writing-convention notes and Bootstrap class labels. Interface labels use real wording. | Decided |
+| 5 | Placeholders and writing notes in mockups | Outline boxes with bracketed prompts, plus switchable writing-convention notes and Bootstrap class labels. Interface labels use real wording. Claude will not write any documentation or user-facing prose, per CLAUDE.md | Decided |
 | 6 | Phone behavior | Below `lg`, the side nav moves into an `NgbOffcanvas` slide-out panel. Below `xl`, "On this page" becomes an `ngbCollapse` toggle. The ticket stacks, and code and tables scroll sideways inside their boxes. | Decided |
 
 ### Styling rules
@@ -54,18 +54,18 @@ Every tutorial frames a refactor as a ticket.
 
 1. **Ticket:** a mock work ticket with a summary, acceptance criteria, and links to the relevant ng-bootstrap docs and WCAG success criteria. Use a generic ticket design, not a copy of Jira's branding.
 2. **Current implementation:** a working example of the code before the refactor. A button opens the code files in tabs, similar to the ng-bootstrap docs.
-3. **Manual a11y testing (before):** a demonstration of manual testing that exposes the issues.
-4. **"Unboxing":** the accessibility improvements you get just by using the directive with its defaults.
+3. **Manual a11y testing (before):** a demonstration of manual testing that exposes the issues. Lists issues and conatins embedded video (will do later - for now show "Screen recording coming soon...").
+4. **"Unboxing":** the accessibility improvements you get just by using the ng-bootstrap component/directive with its defaults.
 5. **Refactor, step by step:** with screenshots. Draws attention to what you must add beyond what comes in the box.
-   - **WATCH OUT** icons appear throughout. Each opens a dialog about a common mistake.
+   - **WATCH OUT** icons appear throughout. Each opens a popup about a common mistake.
 6. **Final implementation:** a working example of the finished code, with the same button for viewing code.
 7. **Automated tests.**
-8. **Manual a11y testing (after):** demonstrates that the acceptance criteria and WCAG standards are met.
+8. **Manual a11y testing (after):** demonstrates that the acceptance criteria and WCAG standards are met. Shows table of how a11y issues were addressed and contains embedded video (will do later - for now show "Screen recording coming soon...")
 
 ### Component ideas (dogfooding ng-bootstrap)
 
 - Tabbed code viewer: `ngbNav`
-- WATCH OUT dialogs: `NgbModal`, or `ngbPopover` for shorter notes. Decide which.
+- WATCH OUT dialogs: `ngbPopover`
 - Icon-only buttons in the site header (theme toggle, source link): `ngbTooltip` plus `aria-label`, the same pattern as tutorial 1.
 
 ## Planned tutorials
@@ -75,7 +75,3 @@ Every tutorial frames a refactor as a ticket.
 3. **Manual a11y testing:** NVDA, JAWS, keyboard navigation, axe DevTools and similar tools.
 
 ## Open questions
-
-- Should the setup tutorial (2) come first in the nav, since the others depend on it?
-- WATCH OUT dialogs: modal or popover?
-- Where to host the videos, and how to provide captions and transcripts.

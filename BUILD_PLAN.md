@@ -119,7 +119,7 @@ One commit per component, in table order:
 - [x] 1.4 `OnThisPageComponent`
 - [x] 1.5 `TicketComponent`
 - [x] 1.6 `CodeViewerComponent`
-- [ ] 1.7 `WorkingExampleComponent`
+- [x] 1.7 `WorkingExampleComponent`
 - [ ] 1.8 `WatchOutComponent`
 - [ ] 1.9 `CalloutComponent`
 - [ ] 1.10 `PassFailBadgeComponent`
@@ -212,7 +212,10 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.6 | 40px icon-only "Copy code" button | `.btn-outline-secondary` icon button, 46 × 50px, `aria-label` plus `ngbTooltip`; check icon and visually hidden "Copied" / "Copy failed" status after copying | Differs, plus behavior |
 | 1.6 | Line numbers | None | Not built |
 | 1.6 | Style guide: added lines marked with "+" and a tint | None | Not built |
-| 1.6 | Frame around the viewer | No frame; `WorkingExampleComponent` frames it (1.7) | Pending 1.7 |
+| 1.6 | Frame around the viewer | No frame; `WorkingExampleComponent` frames it (1.7) | Built in 1.7 |
+| 1.7 | Bordered frame, uppercase label in a header row, demo stage on `#F7F5FC` (40px × 24px padding), code toggle below a top border | `.card`; `.card-header .bg-body` with `.small .fw-bold .text-uppercase .text-body-secondary` label; `.card-body .bg-body-tertiary .px-4 .py-5`; code viewer with `.border-top` | Matches |
+| 1.7 | No grouping semantics | Frame is `role="group"` named by its label | Added, not visible |
+| 1.7 | Frame clips its content (`overflow: hidden`) | Only the code viewer is clipped (`.rounded-bottom .overflow-hidden`), so demo tooltips aren't cut off | Differs, not visible |
 
 ## Open questions
 

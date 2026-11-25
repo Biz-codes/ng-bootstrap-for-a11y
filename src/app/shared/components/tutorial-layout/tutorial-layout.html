@@ -1,12 +1,20 @@
-<div class="row">
-  <div class="col-12 col-xl-9 d-flex flex-column gap-5">
-    <div class="d-flex flex-wrap align-items-center gap-3">
-      <h1 class="mb-0">{{ title() }}</h1>
-      @if (status(); as status) {
-        <app-status-badge [status]="status" />
-      }
-    </div>
+<div class="row gy-4">
+  <div class="col-12 col-xl-9 d-flex flex-wrap align-items-center gap-3">
+    <h1 class="mb-0">{{ title() }}</h1>
+    @if (status(); as status) {
+      <app-status-badge [status]="status" />
+    }
+  </div>
+</div>
 
+<div class="row gy-4 mt-0">
+  @if (pageSections().length) {
+    <div class="col-12 col-xl-3 order-xl-last">
+      <app-on-this-page class="d-block sticky-xl-top" [sections]="pageSections()" />
+    </div>
+  }
+
+  <div class="col-12 col-xl-9 d-flex flex-column gap-5">
     <ng-content />
 
     @if (previous() || next()) {

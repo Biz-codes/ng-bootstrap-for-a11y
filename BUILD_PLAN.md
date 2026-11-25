@@ -116,7 +116,7 @@ One commit per component, in table order:
 - [x] 1.1 `StatusBadgeComponent`
 - [x] 1.2 `TutorialLayoutComponent`
 - [x] 1.3 `TutorialSectionComponent`, plus heading sizes and weight in `src/styles.scss`
-- [ ] 1.4 `OnThisPageComponent`
+- [x] 1.4 `OnThisPageComponent`
 - [ ] 1.5 `TicketComponent`
 - [ ] 1.6 `CodeViewerComponent`
 - [ ] 1.7 `WorkingExampleComponent`
@@ -192,9 +192,14 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.2 | Tag, time, and tested-versions row under the `<h1>` | Not in `TutorialLayoutComponent`; can be projected | Not built |
 | 1.2 | No status badge beside the `<h1>` | `StatusBadgeComponent` beside the `<h1>`, outside it | Added |
 | 1.2 | Pagination link: "Previous" / "Next" label above title | Same, plus a visually hidden ": " between label and title | Matches visually |
-| 1.2 | "On this page" column | Content column `col-xl-9`; right column waits for 1.4 | Pending 1.4 |
-| 1.3 | Step number before the `<h2>` | Optional `number` input, outside the `<h2>` | Matches |
+| 1.2 | "On this page" column | Content column `col-xl-9`, `OnThisPageComponent` in `col-xl-3` (1.4) | Built in 1.4 |
+| 1.3 | Step number before the `<h2>`; phone mockup puts it inside the `<h2>` | Optional `number` input, outside the `<h2>` at every width | Matches desktop mockup; mockups disagree |
 | 1.3 | Headings 44 / 30 / 21px, bold | `$h1-font-size` 2.75rem, `$h2-font-size` 1.875rem, `$h3-font-size` 1.3125rem, `$headings-font-weight` 700; Bootstrap scales them down below 1200px | Matches at 1200px and up |
+| 1.4 | "On this page" column starts level with the `<h1>` | Starts level with the first section, below the `<h1>` row | Differs |
+| 1.4 | List links about 33px tall (6px 10px padding, 14px text) | 44px tall (`.small .lh-lg .py-2`), per DESIGN.md touch targets | Differs |
+| 1.4 | Active section highlighted, `aria-current="location"` | No active state yet | Pending 2.8 |
+| 1.4 | `.sticky-top` | `.sticky-xl-top`, top offset 0 | Offset pending 2.3 header |
+| 1.4 | Phone: full-width bordered "On this page" button with down chevron | Same; chevron points up when open; list closes after a link is chosen | Matches, plus behavior |
 
 ## Open questions
 

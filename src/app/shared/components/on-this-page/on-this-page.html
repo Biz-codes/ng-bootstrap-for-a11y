@@ -1,0 +1,43 @@
+<nav [attr.aria-labelledby]="labelId">
+  <p [id]="labelId" class="d-none d-xl-block mb-2 small fw-bold text-uppercase text-body-secondary">
+    On this page
+  </p>
+  <button
+    type="button"
+    class="btn d-flex d-xl-none w-100 justify-content-between align-items-center py-3 border bg-body-tertiary fw-semibold"
+    [attr.aria-expanded]="!collapsed()"
+    [attr.aria-controls]="listId"
+    (click)="toggle()"
+  >
+    On this page
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polyline [attr.points]="collapsed() ? '6 9 12 15 18 9' : '6 15 12 9 18 15'" />
+    </svg>
+  </button>
+  <div [id]="listId" class="d-xl-block" [ngbCollapse]="collapsed()">
+    <ul class="nav flex-column pt-2 pt-xl-0">
+      @for (section of sections(); track section.id) {
+        <li class="nav-item">
+          <a
+            class="nav-link small lh-lg px-2 py-2 rounded text-body"
+            [routerLink]="[]"
+            [fragment]="section.id"
+            (click)="collapse()"
+            >{{ section.heading }}</a
+          >
+        </li>
+      }
+    </ul>
+  </div>
+</nav>

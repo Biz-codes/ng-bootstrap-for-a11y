@@ -2,11 +2,13 @@ import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { expectNoAxeViolations } from '../../../../testing/axe';
+import { NgbConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Status } from '../status-badge/status-badge';
+import { TutorialSectionComponent } from '../tutorial-section/tutorial-section';
 import { TutorialLayoutComponent, TutorialLink } from './tutorial-layout';
 
 @Component({
-  imports: [TutorialLayoutComponent],
+  imports: [TutorialLayoutComponent, TutorialSectionComponent],
   template: `
     <app-tutorial-layout
       [title]="title()"
@@ -14,8 +16,19 @@ import { TutorialLayoutComponent, TutorialLink } from './tutorial-layout';
       [previous]="previous()"
       [next]="next()"
     >
-      <section id="first"><h2>[Section one]</h2></section>
-      <section id="second"><h2>[Section two]</h2></section>
+      @if (withSections()) {
+        <app-tutorial-section id="first" heading="[Section one]">
+          <p>[Section content]</p>
+        </app-tutorial-section>
+        <app-tutorial-section id="second" [heading]="secondHeading()">
+          <p>[Section content]</p>
+        </app-tutorial-section>
+        @if (withThird()) {
+          <app-tutorial-section id="third" heading="[Section three]" />
+        }
+      } @else {
+        <p class="projected">[Page content]</p>
+      }
     </app-tutorial-layout>
   `,
 })
@@ -24,6 +37,9 @@ class HostComponent {
   readonly status = signal<Status | undefined>(undefined);
   readonly previous = signal<TutorialLink | undefined>(undefined);
   readonly next = signal<TutorialLink | undefined>(undefined);
+  readonly withSections = signal(true);
+  readonly withThird = signal(false);
+  readonly secondHeading = signal('[Section two]');
 }
 
 describe('TutorialLayoutComponent', () => {
@@ -51,6 +67,7 @@ describe('TutorialLayoutComponent', () => {
       imports: [HostComponent],
       providers: [provideRouter([])],
     }).compileComponents();
+    TestBed.inject(NgbConfig).animation = false;
     fixture = TestBed.createComponent(HostComponent);
     host = fixture.componentInstance;
     element = fixture.nativeElement;
@@ -94,6 +111,54 @@ describe('TutorialLayoutComponent', () => {
       const h1 = element.querySelector('h1')!;
       expect(
         h1.compareDocumentPosition(sections[0]) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    });
+  });
+
+  describe('on this page', () => {
+    const onThisPage = () => element.querySelector('app-on-this-page');
+    const tocLinks = () =>
+      Array.from(element.querySelectorAll<HTMLAnchorElement>('app-on-this-page a')).map((link) => ({
+        text: link.textContent?.trim(),
+        href: link.getAttribute('href'),
+      }));
+
+    it('lists every projected section by heading and id', async () => {
+      await render();
+      expect(tocLinks()).toEqual([
+        { text: '[Section one]', href: '/#first' },
+        { text: '[Section two]', href: '/#second' },
+      ]);
+    });
+
+    it('updates when a section is added or a heading changes', async () => {
+      await render();
+      host.withThird.set(true);
+      host.secondHeading.set('[Renamed section]');
+      await render();
+      expect(tocLinks()).toEqual([
+        { text: '[Section one]', href: '/#first' },
+        { text: '[Renamed section]', href: '/#second' },
+        { text: '[Section three]', href: '/#third' },
+      ]);
+    });
+
+    it('is not rendered when there are no sections', async () => {
+      host.withSections.set(false);
+      await render();
+      expect(onThisPage()).toBeNull();
+      expect(element.querySelector('.projected')).not.toBeNull();
+    });
+
+    it('sits in a right-hand column at xl, before the content in source order', async () => {
+      await render();
+      const column = onThisPage()!.parentElement!;
+      expect(column.classList).toContain('col-xl-3');
+      expect(column.classList).toContain('order-xl-last');
+      expect(onThisPage()!.classList).toContain('sticky-xl-top');
+      const firstSection = element.querySelector('section')!;
+      expect(
+        onThisPage()!.compareDocumentPosition(firstSection) & Node.DOCUMENT_POSITION_FOLLOWING,
       ).toBeTruthy();
     });
   });

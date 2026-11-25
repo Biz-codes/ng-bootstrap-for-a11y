@@ -118,7 +118,7 @@ One commit per component, in table order:
 - [x] 1.3 `TutorialSectionComponent`, plus heading sizes and weight in `src/styles.scss`
 - [x] 1.4 `OnThisPageComponent`
 - [x] 1.5 `TicketComponent`
-- [ ] 1.6 `CodeViewerComponent`
+- [x] 1.6 `CodeViewerComponent`
 - [ ] 1.7 `WorkingExampleComponent`
 - [ ] 1.8 `WatchOutComponent`
 - [ ] 1.9 `CalloutComponent`
@@ -206,6 +206,13 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.5 | Side column with a left border; phone mockup stacks it under the main fields | `.vr` from `md` up, `<hr>` below `md`; stacks below `md` | Matches |
 | 1.5 | Links about 21px tall | 44px tall (`.lh-lg .py-2`), per DESIGN.md touch targets | Differs |
 | 1.5 | Plan: projected slots for criteria and links | Criteria and links are inputs, so markup stays consistent; criteria text can't hold inline markup such as `<code>` | Differs from plan |
+| 1.6 | Shown expanded ("Hide code") | Starts collapsed ("View code"); `.btn-primary .btn-sm` with code icon, 46px tall | Matches when expanded |
+| 1.6 | Tab strip and code on `#1F1A2E` | Tab strip on Bootstrap's dark surface (`data-bs-theme="dark"`, `#212529`); code on highlight.js `a11y-dark` (`#2b2b2b`), every token 7:1 or higher | Differs |
+| 1.6 | Custom tabs: active tab `#2C2540` with a lavender underline | Bootstrap `.nav-tabs` in dark mode, file names in `.font-monospace .small` | Differs |
+| 1.6 | 40px icon-only "Copy code" button | `.btn-outline-secondary` icon button, 46 × 50px, `aria-label` plus `ngbTooltip`; check icon and visually hidden "Copied" / "Copy failed" status after copying | Differs, plus behavior |
+| 1.6 | Line numbers | None | Not built |
+| 1.6 | Style guide: added lines marked with "+" and a tint | None | Not built |
+| 1.6 | Frame around the viewer | No frame; `WorkingExampleComponent` frames it (1.7) | Pending 1.7 |
 
 ## Open questions
 

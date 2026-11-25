@@ -44,7 +44,7 @@ The project's professional purpose is to showcase technical writing skills.
 
 ### Focus ring override
 
-Bootstrap's default focus ring is `$primary` at 25% opacity, about 1.5:1 against white. That fails [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), which requires 3:1. Set `$focus-ring-opacity: 1` and use an offset outline so focus is always visible.
+Bootstrap's default focus ring is `$primary` at 25% opacity, about 1.5:1 against white. That fails [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), which requires 3:1. Implemented in `src/styles.scss`: `$focus-ring-width: 0` turns off Bootstrap's ring, and a global `:focus-visible` rule draws a two-tone indicator instead. It is a 3px `$primary` outline with a 2px white gap, so it stays visible on both light and dark backgrounds.
 
 > Possible tutorial idea: fixing Bootstrap's default focus ring.
 

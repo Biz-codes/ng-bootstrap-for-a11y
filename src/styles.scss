@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+// Global styles: Bootstrap themed with the deep violet palette.
+// Override Bootstrap's Sass variables first, then import Bootstrap.
+// Palette and contrast ratios: see DESIGN.md.
+
+// Color
+$primary: #5b21b6; // 9.0:1 on white
+$info: #0f766e; // 5.5:1 on white
+
+$body-color: #1f1a2e; // 16.9:1 on white
+$body-secondary-color: #5b5670; // 7.0:1 on white
+$body-tertiary-bg: #f7f5fc;
+
+$primary-text-emphasis: #4c1d95; // 11.0:1 on white
+$primary-bg-subtle: #ede9fe; // $primary on it: 7.6:1
+$primary-border-subtle: #c4b5fd;
+
+// Focus indicator
+// Bootstrap's default focus ring is $primary at 25% opacity, about 1.5:1 on
+// white, which fails WCAG 1.4.11 Non-text Contrast. Turn off Bootstrap's
+// box-shadow ring and replace it with the outline below.
+$focus-ring-width: 0;
+
+@import 'bootstrap/scss/bootstrap';
+
+// Two-tone focus indicator: a 2px white gap inside a 3px $primary outline.
+// It stays visible on light backgrounds (purple) and dark ones, such as code
+// blocks (white). !important is deliberate: Bootstrap components set
+// `outline: 0` on focus, and the focus indicator must always win.
+:focus-visible {
+  outline: 0.1875rem solid $primary !important;
+  outline-offset: 0.125rem !important;
+  box-shadow: 0 0 0 0.125rem $white !important;
+}

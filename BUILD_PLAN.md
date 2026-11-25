@@ -24,6 +24,11 @@ The project's professional purpose is to showcase technical writing skills.
 | 4 | Tutorial structure | Ticket-based refactor (see [Tutorial template](#tutorial-template)) | Decided |
 | 5 | Placeholders and writing notes in mockups | Outline boxes with bracketed prompts, plus switchable writing-convention notes and Bootstrap class labels. Interface labels use real wording. Claude will not write any documentation or user-facing prose, per CLAUDE.md | Decided |
 | 6 | Phone behavior | Below `lg`, the side nav moves into an `NgbOffcanvas` slide-out panel. Below `xl`, "On this page" becomes an `ngbCollapse` toggle. The ticket stacks, and code and tables scroll sideways inside their boxes. | Decided |
+| 7 | Where tutorial text lives | Angular templates | Decided |
+| 8 | Watch out dialog | `ngbPopover` | Decided |
+| 9 | Dark mode and header theme toggle | Later | Decided |
+| 10 | Code syntax highlighting | Yes, with highlight.js | Decided |
+| 11 | Hosting and deploy target | TBD | Open |
 
 ### Styling rules
 
@@ -78,71 +83,87 @@ Every tutorial frames a refactor as a ticket.
 
 Claude's task list. One commit per step.
 
-### Decisions needed before Phase 3
-
-- [ ] Where tutorial text lives: Angular templates, or Markdown files rendered into pages
-- [ ] Watch out dialog: `ngbPopover` (this file) or `NgbModal` (DESIGN.md)
-- [ ] Header theme toggle: build dark mode now, later, or drop the toggle
-- [ ] Code syntax highlighting library, or none
-- [ ] Hosting and deploy target
-
 ### Phase 0: Clean up and tooling
 
 - [ ] 0.1 Remove the Angular starter template from `app.html` and `app.scss`
-- [ ] 0.2 Swap explanatory comments in `src/styles.scss` for `[Comment: …]` placeholders (CLAUDE.md Rule 1)
-- [ ] 0.3 Add `axe-core` and a shared axe test helper for Vitest
-- [ ] 0.4 Add an `npm run lint` script (Angular ESLint with template a11y rules)
+- [ ] 0.2 Add `axe-core` and a shared axe test helper for Vitest
+- [ ] 0.3 Add an `npm run lint` script (Angular ESLint with template a11y rules)
 
-### Phase 1: App shell
+### Phase 1: Reusable components
 
-- [ ] 1.1 Nav data file: groups (Overview, Foundations, Refactors), routes, titles, status
-- [ ] 1.2 Routes for every nav item, with page titles through a `TitleStrategy`
-- [ ] 1.3 Layout: header, left side nav, `<main>`, footer
-- [ ] 1.4 Skip link to `<main>`
-- [ ] 1.5 Side nav: `.nav-pills .flex-column`, `routerLinkActive`, `aria-current="page"`
-- [ ] 1.6 Below `lg`: side nav in `NgbOffcanvas`, with an "Open navigation" button
-- [ ] 1.7 Header icon buttons with `aria-label` and `ngbTooltip` (source link; theme toggle pending decision)
-- [ ] 1.8 Focus and scroll on route change: move focus to the page `<h1>`, scroll to top, support `#anchor` links
-- [ ] 1.9 Not found page
-- [ ] 1.10 Tests: shell renders, skip link, offcanvas open/close and focus return, axe on each breakpoint
+Standalone components in `src/app/shared/components/`, each with its own spec (keyboard behavior, ARIA states, axe). Text comes from each page's template through inputs or content projection, never from inside the component.
 
-### Phase 2: Overview pages
+| Step | Component | Selector | Built with | Takes |
+|------|-----------|----------|------------|-------|
+| 1.1 | `StatusBadgeComponent` | `app-status-badge` | `.badge`, text plus color | `status`: `coming-soon` \| `under-construction` |
+| 1.2 | `TutorialLayoutComponent` | `app-tutorial-layout` | Grid, previous/next links | `title`, `status`, `previous`, `next`; projected sections |
+| 1.3 | `TutorialSectionComponent` | `app-tutorial-section` | `<section>` with `<h2>` | `heading`, `id`; projected content |
+| 1.4 | `OnThisPageComponent` | `app-on-this-page` | `.nav`, `ngbCollapse` below `xl` | Reads section headings from the layout |
+| 1.5 | `TicketComponent` | `app-ticket` | `.card`, generic design | Projected slots: summary, acceptance criteria, ng-bootstrap links, WCAG links |
+| 1.6 | `CodeViewerComponent` | `app-code-viewer` | `ngbCollapse` "View code" toggle, `ngbNav` file tabs, "Copy code" button, highlight.js (4.5:1 theme), sideways scroll | `files`: `{ name, language, code }[]` |
+| 1.7 | `WorkingExampleComponent` | `app-working-example` | Bordered frame on `$body-tertiary-bg`, with `CodeViewerComponent` below | `label`, `files`; projected live demo |
+| 1.8 | `WatchOutComponent` | `app-watch-out` | `.btn-warning .rounded-pill` with text label, `ngbPopover` | `title`; projected popover content |
+| 1.9 | `CalloutComponent` | `app-callout` | `.alert-primary` / `.alert-info` / `.alert-success` | `type`: `note` \| `tip` \| `result`; projected content |
+| 1.10 | `PassFailBadgeComponent` | `app-pass-fail` | `.badge` with icon and word | `result`: `pass` \| `fail` |
+| 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `rows`; column headers as inputs |
+| 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src`, `alt` (`[Alt text: …]` until filled); projected caption |
+| 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title` |
 
-- [ ] 2.1 Home: heading plus "Coming soon..."
-- [ ] 2.2 About this project, How tutorials work, Writing conventions: heading plus placeholders
-- [ ] 2.3 Tests: one per page, axe included
+- [ ] 1.1–1.13 One commit per component, in table order
+- [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
 
-### Phase 3: Tutorial building blocks
+### Phase 2: App shell
 
-- [ ] 3.1 Status badge: "COMING SOON" / "UNDER CONSTRUCTION", text plus color
-- [ ] 3.2 Tutorial page layout: `<h1>` with badge, eight section slots, previous/next links
-- [ ] 3.3 "On this page" list built from section headings; `ngbCollapse` toggle below `xl`
-- [ ] 3.4 Ticket component: summary, acceptance criteria, ng-bootstrap doc links, WCAG links (generic design)
-- [ ] 3.5 Live example frame for before/after demos
-- [ ] 3.6 Code viewer: "View code" toggle (`ngbCollapse`), file tabs (`ngbNav`), "Copy code" button, horizontal scroll
-- [ ] 3.7 Watch out button (`.btn-warning .rounded-pill`, text label) and dialog
-- [ ] 3.8 Callouts: Note, Tip, result (`.alert-primary`, `.alert-info`, `.alert-success`)
-- [ ] 3.9 Pass/fail badge with icon and word
-- [ ] 3.10 Test results table in `.table-responsive`
-- [ ] 3.11 Screenshot figure: `figure.figure`, numbered callouts, caption slot, `[Alt text: …]` input
-- [ ] 3.12 Video slot showing "Screen recording coming soon..."
-- [ ] 3.13 Tests for each block: keyboard behavior, ARIA states, axe
+- [ ] 2.1 Nav data file: groups (Overview, Foundations, Refactors), routes, titles, status
+- [ ] 2.2 Routes for every nav item, with page titles through a `TitleStrategy`; keep the 1.14 demo route dev-only
+- [ ] 2.3 Layout components in `src/app/layout/`: `HeaderComponent`, `SideNavComponent`, `FooterComponent`, with `<main>` in `App`
+- [ ] 2.4 Skip link to `<main>`
+- [ ] 2.5 `SideNavComponent`: `.nav-pills .flex-column`, `routerLinkActive`, `aria-current="page"`, built from the nav data file
+- [ ] 2.6 Below `lg`: `SideNavComponent` in `NgbOffcanvas`, with an "Open navigation" button in `HeaderComponent`
+- [ ] 2.7 `HeaderComponent` source link icon button with `aria-label` and `ngbTooltip`
+- [ ] 2.8 Focus and scroll on route change: move focus to the page `<h1>`, scroll to top, support `#anchor` links (including links from `OnThisPageComponent`)
+- [ ] 2.9 Not found page
+- [ ] 2.10 Tests: shell renders, skip link, offcanvas open/close and focus return, axe on each breakpoint
+
+### Phase 3: Overview pages
+
+- [ ] 3.1 Home: heading plus "Coming soon..."
+- [ ] 3.2 About this project, How tutorials work, Writing conventions: heading plus placeholders
+- [ ] 3.3 Automated Testing: axe included
+- [ ] 3.4 Manual Testing, with outline for keyboard navigation, screen reader, developer tools, etc.
+- [ ] 3.5 `StatusBadgeComponent` next to the `<h1>` of any page that isn't finished
+- [ ] 3.6 Tests: one spec per page, axe included
 
 ### Phase 4: Tutorial pages
 
-- [ ] 4.1 Tutorial 1 page from the template, all sections as placeholders, status badge
-- [ ] 4.2 Tutorial 1 "before" example: icon-only buttons with no accessible name or tooltip
-- [ ] 4.3 Tutorial 1 "after" example: same buttons with `aria-label` and `ngbTooltip`
-- [ ] 4.4 Tutorial 1 example source files wired into the code viewer
-- [ ] 4.5 Tutorial 1 automated tests shown in section 7 (real, passing specs)
-- [ ] 4.6 Tutorials 2 and 3: pages from the template, placeholders, status badges
+Tutorial 1 is assembled from Phase 1 components, one commit per step:
+
+- [ ] 4.1 Page: `TutorialLayoutComponent` with eight `TutorialSectionComponent`s, `StatusBadgeComponent`, `OnThisPageComponent`, previous/next links
+- [ ] 4.2 Section 1, Ticket: `TicketComponent` with placeholder slots and real ng-bootstrap and WCAG links
+- [ ] 4.3 "Before" example component: icon-only buttons with no accessible name or tooltip
+- [ ] 4.4 Section 2, Current implementation: `WorkingExampleComponent` with the "before" example and its source files as `files`
+- [ ] 4.5 Section 3, Manual testing (before): `ResultsTableComponent` with placeholder rows, `VideoComponent`
+- [ ] 4.6 Section 4, Unboxing: placeholders, `CalloutComponent` where the mockup shows "In the box"
+- [ ] 4.7 Section 5, Refactor: placeholder steps, `ScreenshotComponent`s with `[Alt text: …]`, `WatchOutComponent`s with placeholder content
+- [ ] 4.8 "After" example component: same buttons with `aria-label` and `ngbTooltip`
+- [ ] 4.9 Section 6, Final implementation: `WorkingExampleComponent` with the "after" example and its source files as `files`
+- [ ] 4.10 Section 7, Automated tests: real, passing specs for the "after" example, shown in `CodeViewerComponent`
+- [ ] 4.11 Section 8, Manual testing (after): `ResultsTableComponent` with placeholder rows, `VideoComponent`
+- [ ] 4.12 Tutorials 2 and 3: pages from `TutorialLayoutComponent`, placeholder sections, status badges
 
 ### Phase 5: Check and ship
 
 - [ ] 5.1 Run the `a11y-review` skill across the whole site; fix findings
 - [ ] 5.2 Manual keyboard pass at phone, tablet, and desktop widths
-- [ ] 5.3 Compare each screen with the mockups; list differences for the owner
-- [ ] 5.4 Production build and deploy setup (pending decision)
+- [ ] 5.3 Compare each screen and the 1.14 demo route with the mockups; list differences for the owner
+- [ ] 5.4 Production build and deploy setup (pending hosting decision); confirm the demo route is excluded
 - [ ] 5.5 List every placeholder the owner needs to fill, by page
 
+### Later
+
+- [ ] Video-hosting/deploy target decisions and record videos 
+- [ ] Dark mode palette, contrast-checked
+- [ ] Header theme toggle with `aria-label` and `ngbTooltip`
+
 ## Open questions
+

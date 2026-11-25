@@ -38,7 +38,7 @@ The project's professional purpose is to showcase technical writing skills.
 | `$primary-text-emphasis` | `#4C1D95` | Hover and pressed states, emphasis text | 11.0:1 |
 | `$primary-bg-subtle` | `#EDE9FE` | Subtle backgrounds (active nav item, callouts) | `$primary` on it: 7.6:1 |
 | `$body-color` | `#1F1A2E` | Body text | 16.9:1 |
-| `$secondary-color` | `#5B5670` | Secondary text | 7.0:1 |
+| `$body-secondary-color` | `#5B5670` | Secondary text | 7.0:1 |
 | `$info` | `#0F766E` | "Tip" callouts | 5.5:1 |
 | `$body-tertiary-bg` | `#F7F5FC` | Side nav, code panels | Surface |
 

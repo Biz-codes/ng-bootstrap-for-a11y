@@ -101,7 +101,7 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 | 1.2 | `TutorialLayoutComponent` | `app-tutorial-layout` | Grid, previous/next links | `title`, `status`, `previous`, `next`; projected sections |
 | 1.3 | `TutorialSectionComponent` | `app-tutorial-section` | `<section>` with `<h2>` | `heading`, `id`; projected content |
 | 1.4 | `OnThisPageComponent` | `app-on-this-page` | `.nav`, `ngbCollapse` below `xl` | Reads section headings from the layout |
-| 1.5 | `TicketComponent` | `app-ticket` | `.card`, generic design | Projected slots: summary, acceptance criteria, ng-bootstrap links, WCAG links |
+| 1.5 | `TicketComponent` | `app-ticket` | `.card`, generic design | `ticketId`, `type`, `status`, `criteria` (`{ id, text }[]`), `ngbLinks` and `wcagLinks` (`{ label, href }[]`), `component`, `labels`; projected slots: `[ticketSummary]`, `[ticketDescription]` |
 | 1.6 | `CodeViewerComponent` | `app-code-viewer` | `ngbCollapse` "View code" toggle, `ngbNav` file tabs, "Copy code" button, highlight.js (4.5:1 theme), sideways scroll | `files`: `{ name, language, code }[]` |
 | 1.7 | `WorkingExampleComponent` | `app-working-example` | Bordered frame on `$body-tertiary-bg`, with `CodeViewerComponent` below | `label`, `files`; projected live demo |
 | 1.8 | `WatchOutComponent` | `app-watch-out` | `.btn-warning .rounded-pill` with text label, `ngbPopover` | `title`; projected popover content |
@@ -117,7 +117,7 @@ One commit per component, in table order:
 - [x] 1.2 `TutorialLayoutComponent`
 - [x] 1.3 `TutorialSectionComponent`, plus heading sizes and weight in `src/styles.scss`
 - [x] 1.4 `OnThisPageComponent`
-- [ ] 1.5 `TicketComponent`
+- [x] 1.5 `TicketComponent`
 - [ ] 1.6 `CodeViewerComponent`
 - [ ] 1.7 `WorkingExampleComponent`
 - [ ] 1.8 `WatchOutComponent`
@@ -200,6 +200,12 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.4 | Active section highlighted, `aria-current="location"` | No active state yet | Pending 2.8 |
 | 1.4 | `.sticky-top` | `.sticky-xl-top`, top offset 0 | Offset pending 2.3 header |
 | 1.4 | Phone: full-width bordered "On this page" button with down chevron | Same; chevron points up when open; list closes after a link is chosen | Matches, plus behavior |
+| 1.5 | Header: type icon, type, id, status | `.card-header .bg-body-tertiary`; icon on `.bg-info`, id in `<code>`, status `.badge .bg-secondary-subtle .text-uppercase` | Matches |
+| 1.5 | Summary, Description, Acceptance criteria; side column with Component, Labels, Links | Same fields, as `<dl>` groups; empty optional fields are omitted | Matches |
+| 1.5 | Acceptance criteria with empty checkbox squares | `.list-group`; square is a decorative SVG | Matches |
+| 1.5 | Side column with a left border; phone mockup stacks it under the main fields | `.vr` from `md` up, `<hr>` below `md`; stacks below `md` | Matches |
+| 1.5 | Links about 21px tall | 44px tall (`.lh-lg .py-2`), per DESIGN.md touch targets | Differs |
+| 1.5 | Plan: projected slots for criteria and links | Criteria and links are inputs, so markup stays consistent; criteria text can't hold inline markup such as `<code>` | Differs from plan |
 
 ## Open questions
 

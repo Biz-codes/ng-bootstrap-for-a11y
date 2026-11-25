@@ -114,7 +114,7 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 One commit per component, in table order:
 
 - [x] 1.1 `StatusBadgeComponent`
-- [ ] 1.2 `TutorialLayoutComponent`
+- [x] 1.2 `TutorialLayoutComponent`
 - [ ] 1.3 `TutorialSectionComponent`
 - [ ] 1.4 `OnThisPageComponent`
 - [ ] 1.5 `TicketComponent`

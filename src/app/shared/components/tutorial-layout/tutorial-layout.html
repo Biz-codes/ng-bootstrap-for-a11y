@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-12 col-xl-9 d-flex flex-column gap-5">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <h1 class="mb-0">{{ title() }}</h1>
+      @if (status(); as status) {
+        <app-status-badge [status]="status" />
+      }
+    </div>
+
+    <ng-content />
+
+    @if (previous() || next()) {
+      <nav aria-label="Tutorial pagination" class="border-top pt-4">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          @if (previous(); as previous) {
+            <div class="col">
+              <a
+                [routerLink]="previous.link"
+                class="d-flex flex-column gap-1 h-100 p-3 border rounded-3 text-decoration-none"
+              >
+                <span class="small text-body-secondary"
+                  >Previous<span class="visually-hidden">:&ngsp;</span></span
+                >
+                <span class="fw-semibold">{{ previous.title }}</span>
+              </a>
+            </div>
+          }
+          @if (next(); as next) {
+            <div class="col" [class.offset-md-6]="!previous()">
+              <a
+                [routerLink]="next.link"
+                class="d-flex flex-column gap-1 h-100 p-3 border rounded-3 text-decoration-none text-md-end"
+              >
+                <span class="small text-body-secondary"
+                  >Next<span class="visually-hidden">:&ngsp;</span></span
+                >
+                <span class="fw-semibold">{{ next.title }}</span>
+              </a>
+            </div>
+          }
+        </div>
+      </nav>
+    }
+  </div>
+</div>

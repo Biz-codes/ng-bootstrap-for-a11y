@@ -111,7 +111,21 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 | 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src`, `alt` (`[Alt text: …]` until filled); projected caption |
 | 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title` |
 
-- [ ] 1.1–1.13 One commit per component, in table order
+One commit per component, in table order:
+
+- [x] 1.1 `StatusBadgeComponent`
+- [ ] 1.2 `TutorialLayoutComponent`
+- [ ] 1.3 `TutorialSectionComponent`
+- [ ] 1.4 `OnThisPageComponent`
+- [ ] 1.5 `TicketComponent`
+- [ ] 1.6 `CodeViewerComponent`
+- [ ] 1.7 `WorkingExampleComponent`
+- [ ] 1.8 `WatchOutComponent`
+- [ ] 1.9 `CalloutComponent`
+- [ ] 1.10 `PassFailBadgeComponent`
+- [ ] 1.11 `ResultsTableComponent`
+- [ ] 1.12 `ScreenshotComponent`
+- [ ] 1.13 `VideoComponent`
 - [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
 
 ### Phase 2: App shell

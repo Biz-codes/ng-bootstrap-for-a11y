@@ -126,7 +126,7 @@ One commit per component, in table order:
 - [x] 1.11 `ResultsTableComponent`
 - [x] 1.12 `ScreenshotComponent`
 - [x] 1.13 `VideoComponent`
-- [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
+- [x] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
 
 ### Phase 2: App shell
 
@@ -234,6 +234,7 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.12 | Caption under the image, 14px secondary | `figcaption.figure-caption` with projected content | Matches |
 | 1.13 | 16:9 `#1F1A2E` box with a white round "Play video: [title]" button | Until a video is ready: `.ratio-16x9 .text-bg-dark` box with a video icon and "Screen recording coming soon..."; then a native `<video controls>` named by `title`, with an English captions track | Differs (placeholder phase) |
 | 1.13 | Figcaption with Captions and "Read the transcript" links plus caption text | `figcaption.figure-caption` with projected content; captions come from the `<track>`, so a Captions link isn't needed | Differs slightly |
+| 1.14 | No demo screen | `/dev/components` (dev builds only): every Phase 1 component in a `TutorialLayoutComponent` page, no site header or side nav until Phase 2 | Added |
 
 ## Open questions
 

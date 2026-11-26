@@ -121,7 +121,7 @@ One commit per component, in table order:
 - [x] 1.6 `CodeViewerComponent`
 - [x] 1.7 `WorkingExampleComponent`
 - [x] 1.8 `WatchOutComponent`
-- [ ] 1.9 `CalloutComponent`
+- [x] 1.9 `CalloutComponent`
 - [ ] 1.10 `PassFailBadgeComponent`
 - [ ] 1.11 `ResultsTableComponent`
 - [ ] 1.12 `ScreenshotComponent`
@@ -219,6 +219,10 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.8 | `.btn-warning .rounded-pill`, warning icon plus "Watch out", `aria-label="Watch out: [mistake]"`, 36px tall | Same classes, icon, label, and `aria-label` pattern; 46px tall | Matches, larger |
 | 1.8 | Opens an `NgbModal` dialog: header with icon, title, and Close; Don't / Do instead / Why it matters; "Got it" button | `ngbPopover` (decision 8) holding only the projected short note: no header, no buttons; opens and closes on click, closes on Escape or a click outside | Differs (owner's choice) |
 | 1.8 | `aria-haspopup="dialog"` | `aria-expanded`; popover described to the button with `aria-describedby` while open, rendered right after the button | Differs, not visible |
+| 1.9 | Note: `#EDE9FE` background, `#4C1D95` text, `#C4B5FD` border, bold "Note:" | `.alert-primary` from the palette tokens, bold "Note:" | Matches |
+| 1.9 | Tip: `#E6F4F2` background, `#0F4F4A` text, `#99D1CB` border | `.alert-info` computed from `$info`: `#CFE4E2` background, `#062F2C` text | Differs slightly |
+| 1.9 | Result: teal `#F0F9F8`, no border, check icon, bold "You should now see:" | `.alert-success` (Bootstrap green `#D1E7DD` / `#0A3622`, with border), check icon, same label | Differs |
+| 1.9 | "In the box" / "You still add" boxes: bordered cards with `<h3>` and icon lists | Not a callout; built in 4.6 | Pending 4.6 |
 
 ## Open questions
 

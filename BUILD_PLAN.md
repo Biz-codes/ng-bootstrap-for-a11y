@@ -107,7 +107,7 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 | 1.8 | `WatchOutComponent` | `app-watch-out` | `.btn-warning .rounded-pill` with text label, `ngbPopover` | `title`; projected popover content |
 | 1.9 | `CalloutComponent` | `app-callout` | `.alert-primary` / `.alert-info` / `.alert-success` | `type`: `note` \| `tip` \| `result`; projected content |
 | 1.10 | `PassFailBadgeComponent` | `app-pass-fail` | `.badge` with icon and word | `result`: `pass` \| `fail` |
-| 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `rows`; column headers as inputs |
+| 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `label` (visually hidden caption), `headers`, `resultHeader`, `rows` (`{ cells, result }[]`) |
 | 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src`, `alt` (`[Alt text: …]` until filled); projected caption |
 | 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title` |
 
@@ -123,7 +123,7 @@ One commit per component, in table order:
 - [x] 1.8 `WatchOutComponent`
 - [x] 1.9 `CalloutComponent`
 - [x] 1.10 `PassFailBadgeComponent`
-- [ ] 1.11 `ResultsTableComponent`
+- [x] 1.11 `ResultsTableComponent`
 - [ ] 1.12 `ScreenshotComponent`
 - [ ] 1.13 `VideoComponent`
 - [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
@@ -224,6 +224,11 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.9 | Result: teal `#F0F9F8`, no border, check icon, bold "You should now see:" | `.alert-success` (Bootstrap green `#D1E7DD` / `#0A3622`, with border), check icon, same label | Differs |
 | 1.9 | "In the box" / "You still add" boxes: bordered cards with `<h3>` and icon lists | Not a callout; built in 4.6 | Pending 4.6 |
 | 1.10 | Pass: `#D1E7DD` / `#0A3622` with check; Fail: `#F8D7DA` / `#58151C` with cross; 12px bold | `.badge .bg-success-subtle .text-success-emphasis` / `.bg-danger-subtle .text-danger-emphasis` with the same icons and words | Matches |
+| 1.11 | Bordered, rounded, sideways-scrolling table; header row on `#F7F5FC`; 14px text; first column bold; Result column with pass/fail badges | `.table-responsive .border .rounded-3` around `.table .align-middle .small`; header cells `.bg-body-tertiary`; first cell a bold `<th scope="row">`; `PassFailBadgeComponent` in the last column | Matches |
+| 1.11 | "What happened" column in secondary gray | Body color in every column | Differs slightly |
+| 1.11 | `min-width: 640px` forces sideways scrolling on phones | No minimum width; columns wrap until the content is wider than the screen | Differs |
+| 1.11 | No caption; scroll box not focusable | Visually hidden `<caption>` from `label`; scroll box is `role="region"`, `tabindex="0"`, named by the caption | Added, not visible |
+| 1.11 | Section 8: "Acceptance criteria met" box with AC badges | Not in the component list | Pending 4.11 |
 
 ## Open questions
 

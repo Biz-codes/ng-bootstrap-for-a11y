@@ -120,7 +120,7 @@ One commit per component, in table order:
 - [x] 1.5 `TicketComponent`
 - [x] 1.6 `CodeViewerComponent`
 - [x] 1.7 `WorkingExampleComponent`
-- [ ] 1.8 `WatchOutComponent`
+- [x] 1.8 `WatchOutComponent`
 - [ ] 1.9 `CalloutComponent`
 - [ ] 1.10 `PassFailBadgeComponent`
 - [ ] 1.11 `ResultsTableComponent`
@@ -216,6 +216,9 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.7 | Bordered frame, uppercase label in a header row, demo stage on `#F7F5FC` (40px × 24px padding), code toggle below a top border | `.card`; `.card-header .bg-body` with `.small .fw-bold .text-uppercase .text-body-secondary` label; `.card-body .bg-body-tertiary .px-4 .py-5`; code viewer with `.border-top` | Matches |
 | 1.7 | No grouping semantics | Frame is `role="group"` named by its label | Added, not visible |
 | 1.7 | Frame clips its content (`overflow: hidden`) | Only the code viewer is clipped (`.rounded-bottom .overflow-hidden`), so demo tooltips aren't cut off | Differs, not visible |
+| 1.8 | `.btn-warning .rounded-pill`, warning icon plus "Watch out", `aria-label="Watch out: [mistake]"`, 36px tall | Same classes, icon, label, and `aria-label` pattern; 46px tall | Matches, larger |
+| 1.8 | Opens an `NgbModal` dialog: header with icon, title, and Close; Don't / Do instead / Why it matters; "Got it" button | `ngbPopover` (decision 8) holding only the projected short note: no header, no buttons; opens and closes on click, closes on Escape or a click outside | Differs (owner's choice) |
+| 1.8 | `aria-haspopup="dialog"` | `aria-expanded`; popover described to the button with `aria-describedby` while open, rendered right after the button | Differs, not visible |
 
 ## Open questions
 

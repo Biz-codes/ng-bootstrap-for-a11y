@@ -122,7 +122,7 @@ One commit per component, in table order:
 - [x] 1.7 `WorkingExampleComponent`
 - [x] 1.8 `WatchOutComponent`
 - [x] 1.9 `CalloutComponent`
-- [ ] 1.10 `PassFailBadgeComponent`
+- [x] 1.10 `PassFailBadgeComponent`
 - [ ] 1.11 `ResultsTableComponent`
 - [ ] 1.12 `ScreenshotComponent`
 - [ ] 1.13 `VideoComponent`
@@ -223,6 +223,7 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.9 | Tip: `#E6F4F2` background, `#0F4F4A` text, `#99D1CB` border | `.alert-info` computed from `$info`: `#CFE4E2` background, `#062F2C` text | Differs slightly |
 | 1.9 | Result: teal `#F0F9F8`, no border, check icon, bold "You should now see:" | `.alert-success` (Bootstrap green `#D1E7DD` / `#0A3622`, with border), check icon, same label | Differs |
 | 1.9 | "In the box" / "You still add" boxes: bordered cards with `<h3>` and icon lists | Not a callout; built in 4.6 | Pending 4.6 |
+| 1.10 | Pass: `#D1E7DD` / `#0A3622` with check; Fail: `#F8D7DA` / `#58151C` with cross; 12px bold | `.badge .bg-success-subtle .text-success-emphasis` / `.bg-danger-subtle .text-danger-emphasis` with the same icons and words | Matches |
 
 ## Open questions
 

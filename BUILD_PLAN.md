@@ -108,7 +108,7 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 | 1.9 | `CalloutComponent` | `app-callout` | `.alert-primary` / `.alert-info` / `.alert-success` | `type`: `note` \| `tip` \| `result`; projected content |
 | 1.10 | `PassFailBadgeComponent` | `app-pass-fail` | `.badge` with icon and word | `result`: `pass` \| `fail` |
 | 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `label` (visually hidden caption), `headers`, `resultHeader`, `rows` (`{ cells, result }[]`) |
-| 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src`, `alt` (`[Alt text: …]` until filled); projected caption |
+| 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src` (optional; placeholder until set), `alt` (`[Alt text: …]` until filled), `callouts` (`{ x, y }[]` in %); projected caption |
 | 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title` |
 
 One commit per component, in table order:
@@ -124,7 +124,7 @@ One commit per component, in table order:
 - [x] 1.9 `CalloutComponent`
 - [x] 1.10 `PassFailBadgeComponent`
 - [x] 1.11 `ResultsTableComponent`
-- [ ] 1.12 `ScreenshotComponent`
+- [x] 1.12 `ScreenshotComponent`
 - [ ] 1.13 `VideoComponent`
 - [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
 
@@ -229,6 +229,9 @@ Running list for 5.3 and a possible wireframe revision.
 | 1.11 | `min-width: 640px` forces sideways scrolling on phones | No minimum width; columns wrap until the content is wider than the screen | Differs |
 | 1.11 | No caption; scroll box not focusable | Visually hidden `<caption>` from `label`; scroll box is `role="region"`, `tabindex="0"`, named by the caption | Added, not visible |
 | 1.11 | Section 8: "Acceptance criteria met" box with AC badges | Not in the component list | Pending 4.11 |
+| 1.12 | Placeholder: dashed `#ADA6C2` border, `#F7F5FC`, 16:7, image icon, "[Screenshot: …]" | `.ratio-21x9 .bg-body-tertiary .border .border-2 .rounded-3` (solid border: Bootstrap has no dashed utility), image icon, shows the `alt` text; exposed as `role="img"` named by `alt` | Differs slightly |
+| 1.12 | Numbered callouts: 26px `$primary` circles, white bold numbers | `.badge .rounded-pill .bg-primary`, `.position-absolute .translate-middle`, positioned by `left`/`top` % from `callouts`; hidden from assistive technology | Differs slightly (smaller) |
+| 1.12 | Caption under the image, 14px secondary | `figcaption.figure-caption` with projected content | Matches |
 
 ## Open questions
 

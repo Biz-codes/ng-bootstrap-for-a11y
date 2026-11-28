@@ -1,0 +1,108 @@
+<div class="px-3 py-2">
+  <button
+    type="button"
+    class="btn btn-primary btn-sm lh-lg px-3 py-2 d-inline-flex align-items-center gap-2 fw-semibold"
+    [attr.aria-expanded]="!collapsed()"
+    [attr.aria-controls]="panelId"
+    (click)="toggle()"
+  >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+    {{ collapsed() ? 'View code' : 'Hide code' }}
+  </button>
+</div>
+
+<div [id]="panelId" [ngbCollapse]="collapsed()">
+  <div data-bs-theme="dark" class="bg-body">
+    <div class="d-flex align-items-end px-2 pt-2">
+      <div
+        ngbNav
+        #nav="ngbNav"
+        class="nav-tabs flex-nowrap flex-grow-1 overflow-x-auto overflow-y-hidden"
+        aria-label="Files"
+        keyboard="changeWithArrows"
+        [activeId]="activeIndex()"
+        (activeIdChange)="selectFile($event)"
+      >
+        @for (file of highlightedFiles(); track file.name; let index = $index) {
+          <ng-container [ngbNavItem]="index">
+            <button ngbNavLink type="button" class="font-monospace small text-nowrap">
+              {{ file.name }}
+            </button>
+            <ng-template ngbNavContent>
+              <pre class="hljs mb-0 p-3" tabindex="0"><code [innerHTML]="file.html"></code></pre>
+            </ng-template>
+          </ng-container>
+        }
+      </div>
+      <div class="border-bottom ps-2 pb-1">
+        <button
+          type="button"
+          class="btn btn-outline-secondary text-body btn-sm lh-lg px-3 py-2 d-inline-flex align-items-center"
+          aria-label="Copy code"
+          ngbTooltip="Copy code"
+          container="body"
+          (click)="copy()"
+        >
+          @if (copyState() === 'copied') {
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          } @else {
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+          }
+        </button>
+      </div>
+    </div>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+</div>
+
+<span class="visually-hidden" role="status">
+  @switch (copyState()) {
+    @case ('copied') {
+      Copied
+    }
+    @case ('failed') {
+      Copy failed
+    }
+  }
+</span>

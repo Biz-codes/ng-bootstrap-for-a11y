@@ -101,18 +101,32 @@ Standalone components in `src/app/shared/components/`, each with its own spec (k
 | 1.2 | `TutorialLayoutComponent` | `app-tutorial-layout` | Grid, previous/next links | `title`, `status`, `previous`, `next`; projected sections |
 | 1.3 | `TutorialSectionComponent` | `app-tutorial-section` | `<section>` with `<h2>` | `heading`, `id`; projected content |
 | 1.4 | `OnThisPageComponent` | `app-on-this-page` | `.nav`, `ngbCollapse` below `xl` | Reads section headings from the layout |
-| 1.5 | `TicketComponent` | `app-ticket` | `.card`, generic design | Projected slots: summary, acceptance criteria, ng-bootstrap links, WCAG links |
+| 1.5 | `TicketComponent` | `app-ticket` | `.card`, generic design | `ticketId`, `type`, `status`, `criteria` (`{ id, text }[]`), `ngbLinks` and `wcagLinks` (`{ label, href }[]`), `component`, `labels`; projected slots: `[ticketSummary]`, `[ticketDescription]` |
 | 1.6 | `CodeViewerComponent` | `app-code-viewer` | `ngbCollapse` "View code" toggle, `ngbNav` file tabs, "Copy code" button, highlight.js (4.5:1 theme), sideways scroll | `files`: `{ name, language, code }[]` |
 | 1.7 | `WorkingExampleComponent` | `app-working-example` | Bordered frame on `$body-tertiary-bg`, with `CodeViewerComponent` below | `label`, `files`; projected live demo |
 | 1.8 | `WatchOutComponent` | `app-watch-out` | `.btn-warning .rounded-pill` with text label, `ngbPopover` | `title`; projected popover content |
 | 1.9 | `CalloutComponent` | `app-callout` | `.alert-primary` / `.alert-info` / `.alert-success` | `type`: `note` \| `tip` \| `result`; projected content |
 | 1.10 | `PassFailBadgeComponent` | `app-pass-fail` | `.badge` with icon and word | `result`: `pass` \| `fail` |
-| 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `rows`; column headers as inputs |
-| 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src`, `alt` (`[Alt text: …]` until filled); projected caption |
-| 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title` |
+| 1.11 | `ResultsTableComponent` | `app-results-table` | `.table` in `.table-responsive`, `PassFailBadgeComponent` | `label` (visually hidden caption), `headers`, `resultHeader`, `rows` (`{ cells, result }[]`) |
+| 1.12 | `ScreenshotComponent` | `app-screenshot` | `figure.figure`, numbered callouts | `src` (optional; placeholder until set), `alt` (`[Alt text: …]` until filled), `callouts` (`{ x, y }[]` in %); projected caption |
+| 1.13 | `VideoComponent` | `app-video` | Placeholder showing "Screen recording coming soon..." | `src` (optional), `title`, `captions` (WebVTT URL; the video shows only when `src` and `captions` are both set); projected caption |
 
-- [ ] 1.1–1.13 One commit per component, in table order
-- [ ] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
+One commit per component, in table order:
+
+- [x] 1.1 `StatusBadgeComponent`
+- [x] 1.2 `TutorialLayoutComponent`
+- [x] 1.3 `TutorialSectionComponent`, plus heading sizes and weight in `src/styles.scss`
+- [x] 1.4 `OnThisPageComponent`
+- [x] 1.5 `TicketComponent`
+- [x] 1.6 `CodeViewerComponent`
+- [x] 1.7 `WorkingExampleComponent`
+- [x] 1.8 `WatchOutComponent`
+- [x] 1.9 `CalloutComponent`
+- [x] 1.10 `PassFailBadgeComponent`
+- [x] 1.11 `ResultsTableComponent`
+- [x] 1.12 `ScreenshotComponent`
+- [x] 1.13 `VideoComponent`
+- [x] 1.14 Demo route (dev builds only) showing every component in every state, for checking against the mockups
 
 ### Phase 2: App shell
 
@@ -166,6 +180,61 @@ Tutorial 1 is assembled from Phase 1 components, one commit per step:
 - [ ] Video-hosting/deploy target decisions and record videos 
 - [ ] Dark mode palette, contrast-checked
 - [ ] Header theme toggle with `aria-label` and `ngbTooltip`
+
+## Mockup differences
+
+Running list for 5.3 and a possible wireframe revision.
+
+| Step | Mockup | Build | Status |
+|------|--------|-------|--------|
+| 1.1 | No status badge | `StatusBadgeComponent`: `.badge` with `bg-*-subtle`, `text-*-emphasis`, `border-*-subtle` (secondary for Coming soon, warning for Under construction), `.text-uppercase` | Added |
+| 1.2 | Breadcrumb above the `<h1>` | Not in `TutorialLayoutComponent` | Not built; could come from the 2.1 nav data |
+| 1.2 | Tag, time, and tested-versions row under the `<h1>` | Not in `TutorialLayoutComponent`; can be projected | Not built |
+| 1.2 | No status badge beside the `<h1>` | `StatusBadgeComponent` beside the `<h1>`, outside it | Added |
+| 1.2 | Pagination link: "Previous" / "Next" label above title | Same, plus a visually hidden ": " between label and title | Matches visually |
+| 1.2 | "On this page" column | Content column `col-xl-9`, `OnThisPageComponent` in `col-xl-3` (1.4) | Built in 1.4 |
+| 1.3 | Step number before the `<h2>`; phone mockup puts it inside the `<h2>` | Optional `number` input, outside the `<h2>` at every width | Matches desktop mockup; mockups disagree |
+| 1.3 | Headings 44 / 30 / 21px, bold | `$h1-font-size` 2.75rem, `$h2-font-size` 1.875rem, `$h3-font-size` 1.3125rem, `$headings-font-weight` 700; Bootstrap scales them down below 1200px | Matches at 1200px and up |
+| 1.4 | "On this page" column starts level with the `<h1>` | Starts level with the first section, below the `<h1>` row | Differs |
+| 1.4 | List links about 33px tall (6px 10px padding, 14px text) | 44px tall (`.small .lh-lg .py-2`), per DESIGN.md touch targets | Differs |
+| 1.4 | Active section highlighted, `aria-current="location"` | No active state yet | Pending 2.8 |
+| 1.4 | `.sticky-top` | `.sticky-xl-top`, top offset 0 | Offset pending 2.3 header |
+| 1.4 | Phone: full-width bordered "On this page" button with down chevron | Same; chevron points up when open; list closes after a link is chosen | Matches, plus behavior |
+| 1.5 | Header: type icon, type, id, status | `.card-header .bg-body-tertiary`; icon on `.bg-info`, id in `<code>`, status `.badge .bg-secondary-subtle .text-uppercase` | Matches |
+| 1.5 | Summary, Description, Acceptance criteria; side column with Component, Labels, Links | Same fields, as `<dl>` groups; empty optional fields are omitted | Matches |
+| 1.5 | Acceptance criteria with empty checkbox squares | `.list-group`; square is a decorative SVG | Matches |
+| 1.5 | Side column with a left border; phone mockup stacks it under the main fields | `.vr` from `md` up, `<hr>` below `md`; stacks below `md` | Matches |
+| 1.5 | Links about 21px tall | 44px tall (`.lh-lg .py-2`), per DESIGN.md touch targets | Differs |
+| 1.5 | Plan: projected slots for criteria and links | Criteria and links are inputs, so markup stays consistent; criteria text can't hold inline markup such as `<code>` | Differs from plan |
+| 1.6 | Shown expanded ("Hide code") | Starts collapsed ("View code"); `.btn-primary .btn-sm` with code icon, 46px tall | Matches when expanded |
+| 1.6 | Tab strip and code on `#1F1A2E` | Tab strip on Bootstrap's dark surface (`data-bs-theme="dark"`, `#212529`); code on highlight.js `a11y-dark` (`#2b2b2b`), every token 7:1 or higher | Differs |
+| 1.6 | Custom tabs: active tab `#2C2540` with a lavender underline | Bootstrap `.nav-tabs` in dark mode, file names in `.font-monospace .small` | Differs |
+| 1.6 | 40px icon-only "Copy code" button | `.btn-outline-secondary` icon button, 46 × 50px, `aria-label` plus `ngbTooltip`; check icon and visually hidden "Copied" / "Copy failed" status after copying | Differs, plus behavior |
+| 1.6 | Line numbers | None | Not built |
+| 1.6 | Style guide: added lines marked with "+" and a tint | None | Not built |
+| 1.6 | Frame around the viewer | No frame; `WorkingExampleComponent` frames it (1.7) | Built in 1.7 |
+| 1.7 | Bordered frame, uppercase label in a header row, demo stage on `#F7F5FC` (40px × 24px padding), code toggle below a top border | `.card`; `.card-header .bg-body` with `.small .fw-bold .text-uppercase .text-body-secondary` label; `.card-body .bg-body-tertiary .px-4 .py-5`; code viewer with `.border-top` | Matches |
+| 1.7 | No grouping semantics | Frame is `role="group"` named by its label | Added, not visible |
+| 1.7 | Frame clips its content (`overflow: hidden`) | Only the code viewer is clipped (`.rounded-bottom .overflow-hidden`), so demo tooltips aren't cut off | Differs, not visible |
+| 1.8 | `.btn-warning .rounded-pill`, warning icon plus "Watch out", `aria-label="Watch out: [mistake]"`, 36px tall | Same classes, icon, label, and `aria-label` pattern; 46px tall | Matches, larger |
+| 1.8 | Opens an `NgbModal` dialog: header with icon, title, and Close; Don't / Do instead / Why it matters; "Got it" button | `ngbPopover` (decision 8) holding only the projected short note: no header, no buttons; opens and closes on click, closes on Escape or a click outside | Differs (owner's choice) |
+| 1.8 | `aria-haspopup="dialog"` | `aria-expanded`; popover described to the button with `aria-describedby` while open, rendered right after the button | Differs, not visible |
+| 1.9 | Note: `#EDE9FE` background, `#4C1D95` text, `#C4B5FD` border, bold "Note:" | `.alert-primary` from the palette tokens, bold "Note:" | Matches |
+| 1.9 | Tip: `#E6F4F2` background, `#0F4F4A` text, `#99D1CB` border | `.alert-info` computed from `$info`: `#CFE4E2` background, `#062F2C` text | Differs slightly |
+| 1.9 | Result: teal `#F0F9F8`, no border, check icon, bold "You should now see:" | `.alert-success` (Bootstrap green `#D1E7DD` / `#0A3622`, with border), check icon, same label | Differs |
+| 1.9 | "In the box" / "You still add" boxes: bordered cards with `<h3>` and icon lists | Not a callout; built in 4.6 | Pending 4.6 |
+| 1.10 | Pass: `#D1E7DD` / `#0A3622` with check; Fail: `#F8D7DA` / `#58151C` with cross; 12px bold | `.badge .bg-success-subtle .text-success-emphasis` / `.bg-danger-subtle .text-danger-emphasis` with the same icons and words | Matches |
+| 1.11 | Bordered, rounded, sideways-scrolling table; header row on `#F7F5FC`; 14px text; first column bold; Result column with pass/fail badges | `.table-responsive .border .rounded-3` around `.table .align-middle .small`; header cells `.bg-body-tertiary`; first cell a bold `<th scope="row">`; `PassFailBadgeComponent` in the last column | Matches |
+| 1.11 | "What happened" column in secondary gray | Body color in every column | Differs slightly |
+| 1.11 | `min-width: 640px` forces sideways scrolling on phones | No minimum width; columns wrap until the content is wider than the screen | Differs |
+| 1.11 | No caption; scroll box not focusable | Visually hidden `<caption>` from `label`; scroll box is `role="region"`, `tabindex="0"`, named by the caption | Added, not visible |
+| 1.11 | Section 8: "Acceptance criteria met" box with AC badges | Not in the component list | Pending 4.11 |
+| 1.12 | Placeholder: dashed `#ADA6C2` border, `#F7F5FC`, 16:7, image icon, "[Screenshot: …]" | `.ratio-21x9 .bg-body-tertiary .border .border-2 .rounded-3` (solid border: Bootstrap has no dashed utility), image icon, shows the `alt` text; exposed as `role="img"` named by `alt` | Differs slightly |
+| 1.12 | Numbered callouts: 26px `$primary` circles, white bold numbers | `.badge .rounded-pill .bg-primary`, `.position-absolute .translate-middle`, positioned by `left`/`top` % from `callouts`; hidden from assistive technology | Differs slightly (smaller) |
+| 1.12 | Caption under the image, 14px secondary | `figcaption.figure-caption` with projected content | Matches |
+| 1.13 | 16:9 `#1F1A2E` box with a white round "Play video: [title]" button | Until a video is ready: `.ratio-16x9 .text-bg-dark` box with a video icon and "Screen recording coming soon..."; then a native `<video controls>` named by `title`, with an English captions track | Differs (placeholder phase) |
+| 1.13 | Figcaption with Captions and "Read the transcript" links plus caption text | `figcaption.figure-caption` with projected content; captions come from the `<track>`, so a Captions link isn't needed | Differs slightly |
+| 1.14 | No demo screen | `/dev/components` (dev builds only): every Phase 1 component in a `TutorialLayoutComponent` page, no site header or side nav until Phase 2 | Added |
 
 ## Open questions
 

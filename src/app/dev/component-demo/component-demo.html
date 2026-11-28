@@ -1,0 +1,140 @@
+<div class="container-xxl py-5">
+  <app-tutorial-layout
+    title="Component demo"
+    status="under-construction"
+    [previous]="previous"
+    [next]="next"
+  >
+    <app-tutorial-section id="status-badge" heading="StatusBadgeComponent" [number]="1">
+      <div class="d-flex flex-wrap gap-3">
+        <app-status-badge status="coming-soon" />
+        <app-status-badge status="under-construction" />
+      </div>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="tutorial-section" heading="TutorialSectionComponent">
+      <p class="mb-0">[Section without a number]</p>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="ticket" heading="TicketComponent" [number]="2">
+      <app-ticket
+        ticketId="A11Y-1"
+        type="Story"
+        status="To do"
+        component="[Component]"
+        [labels]="['a11y', 'refactor']"
+        [criteria]="criteria"
+        [ngbLinks]="ngbLinks"
+        [wcagLinks]="wcagLinks"
+      >
+        <span ticketSummary>[Summary]</span>
+        <span ticketDescription>[Description]</span>
+      </app-ticket>
+      <app-ticket ticketId="A11Y-2" type="Story" status="To do">
+        <span ticketSummary>[Summary: required fields only]</span>
+        <span ticketDescription>[Description]</span>
+      </app-ticket>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="working-example" heading="WorkingExampleComponent" [number]="3">
+      <app-working-example label="Live example · Before" [files]="files">
+        <div
+          class="d-flex gap-2 p-2 bg-body border rounded-3"
+          role="toolbar"
+          aria-label="[Toolbar label]"
+        >
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            aria-label="[Button one]"
+            ngbTooltip="[Button one]"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            aria-label="[Button two]"
+            ngbTooltip="[Button two]"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" />
+            </svg>
+          </button>
+        </div>
+      </app-working-example>
+      <app-working-example label="Live example · No code">
+        <p class="mb-0">[Live demo with no files]</p>
+      </app-working-example>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="code-viewer" heading="CodeViewerComponent" [number]="4">
+      <div class="border rounded-3 overflow-hidden">
+        <app-code-viewer [files]="files" />
+      </div>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="watch-out" heading="WatchOutComponent" [number]="5">
+      <div class="d-flex flex-wrap align-items-center gap-3">
+        <h3 class="mb-0">[Step title]</h3>
+        <app-watch-out title="[Common mistake]">[Short Watch out note]</app-watch-out>
+      </div>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="callout" heading="CalloutComponent" [number]="6">
+      <app-callout type="note">[Note text]</app-callout>
+      <app-callout type="tip">[Tip text]</app-callout>
+      <app-callout type="result">[Result text]</app-callout>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="pass-fail" heading="PassFailBadgeComponent" [number]="7">
+      <div class="d-flex flex-wrap gap-3">
+        <app-pass-fail result="pass" />
+        <app-pass-fail result="fail" />
+      </div>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="results-table" heading="ResultsTableComponent" [number]="8">
+      <app-results-table
+        label="[Table label]"
+        [headers]="resultHeaders"
+        resultHeader="Result"
+        [rows]="results"
+      />
+    </app-tutorial-section>
+
+    <app-tutorial-section id="screenshot" heading="ScreenshotComponent" [number]="9">
+      <app-screenshot alt="[Alt text: what to notice]" [callouts]="screenshotCallouts">
+        [Caption: what callouts 1 and 2 point to]
+      </app-screenshot>
+    </app-tutorial-section>
+
+    <app-tutorial-section id="video" heading="VideoComponent" [number]="10">
+      <app-video title="[Video title]">[Caption: what the video shows]</app-video>
+    </app-tutorial-section>
+  </app-tutorial-layout>
+</div>

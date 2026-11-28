@@ -30,7 +30,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "node_modules/highlight.js/styles/a11y-dark.css"],
             "polyfills": ["@angular/localize/init"],
             "stylePreprocessorOptions": {
               "sass": {

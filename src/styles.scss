@@ -14,6 +14,12 @@ $primary-text-emphasis: #4c1d95; // 11.0:1 on white
 $primary-bg-subtle: #ede9fe; // $primary on it: 7.6:1
 $primary-border-subtle: #c4b5fd;
 
+// Type
+$h1-font-size: 2.75rem;
+$h2-font-size: 1.875rem;
+$h3-font-size: 1.3125rem;
+$headings-font-weight: 700;
+
 // Focus indicator
 // Bootstrap's default focus ring is $primary at 25% opacity, about 1.5:1 on
 // white, which fails WCAG 1.4.11 Non-text Contrast. Turn off Bootstrap's
